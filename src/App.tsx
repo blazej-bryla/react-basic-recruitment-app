@@ -25,10 +25,12 @@ function App() {
         <TopBar />
 
         <Grid container>
-          <Grid item sx={{ width: 200 }}>
+          <Grid item sx={{ width: 300 }}>
             <LeftNavigation />
           </Grid>
-          <Grid item xs>
+          <Grid item xs sx={{
+            backgroundColor: lightTheme.palette.background.default
+          }}>
             <Routes>
               {Object.values(navigationRoutes).map((route) => (
                 <Route key={route.path} path={route.path} element={route.element} />
