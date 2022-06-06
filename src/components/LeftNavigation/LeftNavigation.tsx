@@ -9,16 +9,16 @@ export const LeftNavigation = () => {
     <>
       <p>Management</p>
       <Link to={navigationRoutes.dashboard.path}>Dashboard</Link>
-      <Link to={""}>Sports</Link>
-      <Link to={""}>Competitions</Link>
+      <Link to={"/sports"}>Sports</Link>
+      <Link to={"/competitions"}>Competitions</Link>
       <Divider />
       <p>Planning</p>
-      <Link to={""}>Scheduling</Link>
-      <Link to={""}>Organisations</Link>
+      <Link to={"/scheduling"}>Scheduling</Link>
+      <Link to={"/organisations"}>Organisations</Link>
       <Divider />
       <p>People</p>
-      <Link to={""}>Scheduling</Link>
-      <Link to={""}>Organisations</Link>
+        <Link to={"/scheduling"}>Scheduling</Link>
+        <Link to={"/organisations"}>Organisations</Link>
     </>
   );
 };
