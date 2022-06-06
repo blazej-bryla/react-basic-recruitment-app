@@ -11,7 +11,7 @@ export const TopBar = () => {
     <AppBar
       sx={{
         background: darkTheme.appBar.main,
-          position: "static",
+        position: "static",
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
@@ -25,7 +25,7 @@ export const TopBar = () => {
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
-          padding: {xs: "0", md: "0 1rem 0 1rem"}
+          padding: { xs: "0", md: "0 1rem 0 1rem" },
         }}
       >
         <Box

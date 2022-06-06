@@ -16,4 +16,20 @@ export const navigationRoutes: NavigationRoutes = {
     path: "/sports",
     element: <SportsScreen />,
   },
+  competitions:{
+    path: "/competitions",
+    element: <SportsScreen />,
+  },
+  scheduling:{
+    path: "/scheduling",
+    element: <SportsScreen />,
+  },
+  organisations:{
+    path: "/organisations",
+    element: <SportsScreen />,
+  },
+  users:{
+    path: "/users",
+    element: <SportsScreen />,
+  }
 };
