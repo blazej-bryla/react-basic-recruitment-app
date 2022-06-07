@@ -14,6 +14,7 @@ import {
 import { CSSProperties, FC, ReactElement } from "react";
 import { TableRow } from "./TableRow";
 import { ModelWithId } from "../../types/table.types";
+import {darkTheme, lightTheme} from "../../theme";
 
 export type TableColumn<Model> = {
   id: string;
@@ -38,14 +39,29 @@ export const Table: FC<TableProps<any>> = ({
   return (
     <Box>
       {/*TODO: style to match designs*/}
-      <Paper sx={{}}>
-        <Typography>{title}</Typography>
+      <Paper sx={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        backgroundColor: darkTheme.palette.background.default,
+        paddingX: 3,
+        paddingY: 2,
+      }}>
+        <Typography sx={{
+          color: darkTheme.palette.text.primary
+        }}>{title}</Typography>
         {ButtonProps !== undefined && (
-          <Button variant={"contained"} {...ButtonProps} />
+          <Button variant={"contained"} sx={{
+            paddingY: 0.5,
+            lineHeight: 1.5
+          }} {...ButtonProps} />
         )}
       </Paper>
 
-      <TableContainer>
+      <TableContainer sx={{
+        backgroundColor: lightTheme.palette.background.paper
+      }}>
         <MuiTable>
           <TableHead>
             <MuiTableRow>
