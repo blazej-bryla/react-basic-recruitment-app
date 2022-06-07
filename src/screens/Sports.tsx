@@ -5,7 +5,7 @@ import { Table, TableColumn } from "../components/Table/Table";
 import { Visibility } from "@mui/icons-material";
 import { getSports } from "../service/sports.service";
 import { Box, Typography } from "@mui/material";
-import {darkTheme} from "../theme";
+import { darkTheme } from "../theme";
 
 export const SportsScreen = () => {
   const [sports, setSports] = useState<SportsType | undefined>(undefined);
@@ -63,7 +63,7 @@ export const SportsScreen = () => {
           paddingTop: 2,
           paddingBottom: 4,
           color: darkTheme.palette.secondary.main,
-          fontWeight: 450
+          fontWeight: 450,
         }}
       >
         {sports.teaser}
