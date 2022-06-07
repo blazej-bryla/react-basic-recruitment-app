@@ -36,9 +36,13 @@ export const DashboardScreen = () => {
   }
 
   return (
-    <Grid container spacing={4} sx={{
-      padding: 4
-    }}>
+    <Grid
+      container
+      spacing={4}
+      sx={{
+        padding: 4,
+      }}
+    >
       {items.map((item) => {
         return (
           <Grid item xs={6} key={item.id}>
@@ -47,7 +51,6 @@ export const DashboardScreen = () => {
                 backgroundColor: lightTheme.palette.background.paper,
                 borderBottomLeftRadius: 4,
                 borderBottomRightRadius: 4,
-
               }}
             >
               <Typography
@@ -59,7 +62,6 @@ export const DashboardScreen = () => {
                   fontSize: 18,
                   borderTopLeftRadius: 4,
                   borderTopRightRadius: 4,
-
                 }}
               >
                 {item.title}
@@ -71,26 +73,25 @@ export const DashboardScreen = () => {
                   overflow: "hidden",
                   maxHeight: "300px",
                   textOverflow: "ellipsis",
-                 WebkitLineClamp: "4",
+                  WebkitLineClamp: "4",
                   WebkitBoxOrient: "vertical",
                   display: "-webkit-box",
-                  lineHeight: "26px"
+                  lineHeight: "26px",
                 }}
               >
                 {item.text}
-
               </Typography>
               <Link
-                  href={"#"}
-                  sx={{
-                    textDecoration: "none",
-                    display: "flex",
-                    justifyContent: "end",
-                    textTransform: "uppercase",
-                    fontWeight: 600,
-                    letterSpacing: 2,
-                    padding: 2,
-                  }}
+                href={"#"}
+                sx={{
+                  textDecoration: "none",
+                  display: "flex",
+                  justifyContent: "end",
+                  textTransform: "uppercase",
+                  fontWeight: 600,
+                  letterSpacing: 2,
+                  padding: 2,
+                }}
               >
                 More info
               </Link>
