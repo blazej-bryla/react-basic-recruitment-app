@@ -1,17 +1,23 @@
-import { useEffect, useState } from "react";
-import { SportsType, SportType } from "../types/sports.types";
-import { NoResults } from "../components/NoResults/NoResults";
-import { Table, TableColumn } from "../components/Table/Table";
-import { Visibility } from "@mui/icons-material";
-import { getSportById, getSports } from "../service/sports.service";
-import { Box, Button, Typography } from "@mui/material";
-import { darkTheme } from "../theme";
+import {useContext, useEffect, useState} from "react";
+import {SportsType, SportType} from "../types/sports.types";
+import {NoResults} from "../components/NoResults/NoResults";
+import {Table, TableColumn} from "../components/Table/Table";
+import {Visibility} from "@mui/icons-material";
+import {getSportById, getSports} from "../service/sports.service";
+import {Box, Typography} from "@mui/material";
+import {darkTheme, lightTheme} from "../theme";
+import {RowContext} from "../components/Context/ActiveRowContext";
+
 
 export const SportsScreen = () => {
   const [sports, setSports] = useState<SportsType | undefined>(undefined);
   const [sportDetails, setSportDetails] = useState<SportType | undefined>(
     undefined
   );
+  // @ts-ignore 
+  const { setActiveRow, activeRow } = useContext(RowContext);
+  
+  
 
   const columns: TableColumn<SportType>[] = [
     { id: "sport", label: "Sport", value: "name" },
@@ -20,18 +26,31 @@ export const SportsScreen = () => {
     {
       id: "actions",
       label: "Actions",
-      // value: <Visibility onClick={(e) => getSportDetails(e.currentTarget.parentNode.parentNode.rowIndex)} />,
       value: <Visibility />,
       textAlign: "right",
+      action: (sportId: number) => () => {
+        setActiveRow(sportId);
+      },
     },
   ];
 
-  const getSportDetails = (id: SportType["id"]) => {
-    // TODO: get sport details
-    console.log("ID:", id);
-    console.log("DESC:", getSportById(id));
-    return getSportById(id);
+  const getSportDetails = async (id: SportType["id"]) => {
+    try {
+      return await getSportById(id);
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  useEffect(() => {
+    if (!Number.isNaN(Number(activeRow))) {
+      getSportDetails(Number(activeRow))
+        .then((data) => {
+          setSportDetails(data);
+        })
+        .catch(console.error);
+    }
+  }, [activeRow]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,14 +93,52 @@ export const SportsScreen = () => {
       >
         {sports.teaser}
       </Typography>
-      <Table
-        title={"Sports"}
-        columns={columns}
-        items={sports.items}
-        ButtonProps={{
-          children: "ADD SPORT",
+      <Box
+        sx={{
+          display: "flex",
+          flexdirection: "row",
+          gap: 4
         }}
-      />
+      >
+        <Box sx={{
+          flex: 1,
+        }}>
+          <Table
+            title={"Sports"}
+            columns={columns}
+            items={sports.items}
+            ButtonProps={{
+              children: "ADD SPORT",
+            }}
+          />
+        </Box>
+        {sportDetails ? (
+          <Box
+            sx={{
+              backgroundColor: lightTheme.palette.background.paper,
+              paddingX: 2,
+              paddingY: 4,
+              flex: 1,
+            }}
+          >
+            <Typography
+              sx={{
+                fontWeight: 450,
+              }}
+            >
+              {sportDetails.name} ({sportDetails.location})
+            </Typography>
+            <Typography
+              sx={{
+                color: darkTheme.palette.secondary.main,
+                paddingTop: 2,
+              }}
+            >
+              {sportDetails.description}
+            </Typography>
+          </Box>
+        ) : null}
+      </Box>
     </Box>
   );
 };

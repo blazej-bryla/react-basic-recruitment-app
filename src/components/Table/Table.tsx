@@ -20,6 +20,7 @@ export type TableColumn<Model> = {
   id: string;
   label: string;
   value: keyof Model | ReactElement;
+  action?: (sportId: number) => void;
   textAlign?: CSSProperties["textAlign"];
 };
 
