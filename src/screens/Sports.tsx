@@ -3,8 +3,8 @@ import { SportsType, SportType } from "../types/sports.types";
 import { NoResults } from "../components/NoResults/NoResults";
 import { Table, TableColumn } from "../components/Table/Table";
 import { Visibility } from "@mui/icons-material";
-import { getSports } from "../service/sports.service";
-import { Box, Typography } from "@mui/material";
+import { getSportById, getSports } from "../service/sports.service";
+import { Box, Button, Typography } from "@mui/material";
 import { darkTheme } from "../theme";
 
 export const SportsScreen = () => {
@@ -20,6 +20,7 @@ export const SportsScreen = () => {
     {
       id: "actions",
       label: "Actions",
+      // value: <Visibility onClick={(e) => getSportDetails(e.currentTarget.parentNode.parentNode.rowIndex)} />,
       value: <Visibility />,
       textAlign: "right",
     },
@@ -27,6 +28,9 @@ export const SportsScreen = () => {
 
   const getSportDetails = (id: SportType["id"]) => {
     // TODO: get sport details
+    console.log("ID:", id);
+    console.log("DESC:", getSportById(id));
+    return getSportById(id);
   };
 
   useEffect(() => {
@@ -37,7 +41,9 @@ export const SportsScreen = () => {
       .then((r) => setSports(r))
       .catch(console.error);
   }, [setSports]);
-  console.log(sports);
+
+  // console.log(sports);
+
   if (!sports) {
     return <NoResults />;
   }

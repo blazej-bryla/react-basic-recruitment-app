@@ -24,8 +24,8 @@ export const TableRow = <Model extends ModelWithId>({
 
   return (
     <MuiTableRow>
-      {columns.map((column) => (
-        <TableCell sx={{ textAlign: column.textAlign || "left" }}>
+      {columns.map((column, i) => (
+        <TableCell key={i} sx={{ textAlign: column.textAlign || "left" }}>
           {getItemContent(column)}
         </TableCell>
       ))}
