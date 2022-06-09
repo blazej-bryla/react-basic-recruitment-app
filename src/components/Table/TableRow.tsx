@@ -1,9 +1,8 @@
 import React, { ReactElement, useContext } from "react";
 import { TableColumn } from "./Table";
-import { TableCell, TableRow as MuiTableRow } from "@mui/material";
+import {TableCell, TableRow as MuiTableRow, useTheme} from "@mui/material";
 import { ModelWithId } from "../../types/table.types";
 import { RowContext } from "../Context/ActiveRowContext";
-import { darkTheme, lightTheme } from "../../theme";
 
 type TableRowProps<Model> = {
   item: Model;
@@ -26,13 +25,14 @@ export const TableRow = <Model extends ModelWithId>({
 
     return item[column.value] as unknown as string;
   };
+  const theme = useTheme()
 
   return (
     <MuiTableRow
       sx={{
         backgroundColor:
           item.id === activeRow
-            ? lightTheme.palette.background.default
+            ? theme.palette.background.default
             : undefined,
       }}
     >
@@ -44,7 +44,7 @@ export const TableRow = <Model extends ModelWithId>({
           {column.id === "actions"
             ? React.cloneElement(getItemContent(column) as ReactElement, {
                 onClick: column.action && column.action(Number(item.id)),
-                sx: {color: item.id === activeRow ? darkTheme.palette.primary.main :undefined}
+                sx: {color: item.id === activeRow ? theme.palette.primary.main :undefined}
               })
             : getItemContent(column)}
         </TableCell>

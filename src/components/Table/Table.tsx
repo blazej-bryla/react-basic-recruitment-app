@@ -1,20 +1,19 @@
 import {
-  Box,
-  Button,
-  ButtonProps,
-  Paper,
-  Table as MuiTable,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow as MuiTableRow,
-  Typography,
+    Box,
+    Button,
+    ButtonProps,
+    Paper,
+    Table as MuiTable,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow as MuiTableRow,
+    Typography, useTheme,
 } from "@mui/material";
 import { CSSProperties, FC, ReactElement } from "react";
 import { TableRow } from "./TableRow";
 import { ModelWithId } from "../../types/table.types";
-import { darkTheme, lightTheme } from "../../theme";
 
 export type TableColumn<Model> = {
   id: string;
@@ -37,6 +36,7 @@ export const Table: FC<TableProps<any>> = ({
   title,
   ButtonProps,
 }) => {
+    const theme = useTheme()
   return (
     <Box>
       {/*TODO: style to match designs*/}
@@ -46,14 +46,14 @@ export const Table: FC<TableProps<any>> = ({
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
-          backgroundColor: darkTheme.palette.background.default,
+          backgroundColor: theme.palette.secondary.dark,
           paddingX: 3,
           paddingY: 2,
         }}
       >
         <Typography
           sx={{
-            color: darkTheme.palette.text.primary,
+              color: theme.palette.secondary.contrastText,
           }}
         >
           {title}
@@ -72,7 +72,7 @@ export const Table: FC<TableProps<any>> = ({
 
       <TableContainer
         sx={{
-          backgroundColor: lightTheme.palette.background.paper,
+          backgroundColor: theme.palette.background.paper,
         }}
       >
         <MuiTable>
