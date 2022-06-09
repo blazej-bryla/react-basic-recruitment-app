@@ -1,6 +1,7 @@
 import { Error404 } from "./screens/404";
 import { DashboardScreen } from "./screens/Dashboard";
 import { SportsScreen } from "./screens/Sports";
+import {Navigate} from "react-router-dom";
 
 type NavigationRoute = {
   path: string;
@@ -32,5 +33,11 @@ export const navigationRoutes: NavigationRoutes = {
   users:{
     path: "/users",
     element: <Error404 />,
-  }
+  },
+  missingDashboard:{
+    path: "/dashboard",
+    element: <Navigate to={"/"} replace/>,
+  },
+
+
 };

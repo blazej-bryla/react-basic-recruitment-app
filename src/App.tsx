@@ -32,7 +32,7 @@ function App() {
             item
             xs
             sx={{
-              backgroundColor: lightTheme.palette.background.default,
+              backgroundColor: theme.palette.background.default,
             }}
           >
             <RowContextProvider>
