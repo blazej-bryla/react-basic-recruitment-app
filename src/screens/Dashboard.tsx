@@ -3,8 +3,8 @@ import { navigationRoutes } from "../navigationRoutes";
 import { DashboardItem, DashboardType } from "../types/dashboard.types";
 import { NoResults } from "../components/NoResults/NoResults";
 import { getDashboards } from "../service/dashboard.service";
-import { Box, Grid, Link, Typography } from "@mui/material";
-import { darkTheme, lightTheme } from "../theme";
+import { Grid, } from "@mui/material";
+import {DashboardCard} from "../components/Card/DashboardCard";
 
 export const DashboardScreen = () => {
   const [items, setItems] = useState<DashboardType[]>([]);
@@ -46,56 +46,7 @@ export const DashboardScreen = () => {
       {items.map((item) => {
         return (
           <Grid item xs={6} key={item.id}>
-            <Box
-              sx={{
-                backgroundColor: lightTheme.palette.background.paper,
-                borderBottomLeftRadius: 4,
-                borderBottomRightRadius: 4,
-              }}
-            >
-              <Typography
-                sx={{
-                  backgroundColor: darkTheme.appBar.main,
-                  color: darkTheme.palette.text.primary,
-                  paddingX: 4,
-                  paddingY: 1,
-                  fontSize: 18,
-                  borderTopLeftRadius: 4,
-                  borderTopRightRadius: 4,
-                }}
-              >
-                {item.title}
-              </Typography>
-              <Typography
-                sx={{
-                  minHeight: "100px",
-                  padding: 4,
-                  overflow: "hidden",
-                  maxHeight: "300px",
-                  textOverflow: "ellipsis",
-                  WebkitLineClamp: "4",
-                  WebkitBoxOrient: "vertical",
-                  display: "-webkit-box",
-                  lineHeight: "26px",
-                }}
-              >
-                {item.text}
-              </Typography>
-              <Link
-                href={"#"}
-                sx={{
-                  textDecoration: "none",
-                  display: "flex",
-                  justifyContent: "end",
-                  textTransform: "uppercase",
-                  fontWeight: 600,
-                  letterSpacing: 2,
-                  padding: 2,
-                }}
-              >
-                More info
-              </Link>
-            </Box>
+            <DashboardCard title={item.title} text={item.text} linkTo={item.id} />
           </Grid>
         );
       })}
