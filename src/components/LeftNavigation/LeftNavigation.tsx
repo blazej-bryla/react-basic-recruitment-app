@@ -1,4 +1,4 @@
-import { Box, Divider, Typography } from "@mui/material";
+import {Box, Divider, Typography, useTheme} from "@mui/material";
 import { navigationRoutes } from "../../navigationRoutes";
 import { NavigationItem } from "./NavigationItem";
 import HomeIcon from "@mui/icons-material/Home";
@@ -7,11 +7,11 @@ import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import FactCheckIcon from "@mui/icons-material/FactCheck";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import GroupIcon from "@mui/icons-material/Group";
-import { darkTheme } from "../../theme";
 /*
   icons can be found in here: https://mui.com/material-ui/material-icons/
  */
 export const LeftNavigation = () => {
+  const theme = useTheme()
   return (
 
     <Box
@@ -19,7 +19,8 @@ export const LeftNavigation = () => {
         width: 300,
         height: "100vh",
         borderRight: 2,
-        borderColor: darkTheme.palette.secondary.main,
+        borderColor: theme.palette.background.default,
+        backgroundColor: theme.palette.background.default
       }}
     >
       <Box sx={{
@@ -28,7 +29,7 @@ export const LeftNavigation = () => {
         <Typography
           sx={{
             paddingLeft: "1rem",
-            color: darkTheme.palette.secondary.main,
+            color: theme.palette.text.primary,
           }}
         >
           Management
@@ -56,7 +57,7 @@ export const LeftNavigation = () => {
       <Typography
         sx={{
           paddingLeft: "1rem",
-          color: darkTheme.palette.secondary.main,
+          color: theme.palette.secondary.main,
         }}
       >
         Planning
@@ -80,7 +81,7 @@ export const LeftNavigation = () => {
       <Typography
         sx={{
           paddingLeft: "1rem",
-          color: darkTheme.palette.secondary.main,
+          color: theme.palette.secondary.main,
         }}
       >
         People
