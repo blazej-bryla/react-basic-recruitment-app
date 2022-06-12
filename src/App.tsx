@@ -1,26 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
-import { Grid, PaletteMode, ThemeProvider } from "@mui/material";
-import { TopBar } from "./components/TopBar/TopBar";
-import { LeftNavigation } from "./components/LeftNavigation/LeftNavigation";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { darkTheme, lightTheme } from "./theme";
-import { Error404 } from "./screens/404";
-import { navigationRoutes } from "./navigationRoutes";
-import { RowContextProvider } from "./components/Context/ActiveRowContext";
+import {Grid} from "@mui/material";
+import {TopBar} from "./components/TopBar/TopBar";
+import {LeftNavigation} from "./components/LeftNavigation/LeftNavigation";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {Error404} from "./screens/404";
+import {navigationRoutes} from "./navigationRoutes";
+import {RowContextProvider} from "./components/Context/ActiveRowContext";
+import {ActiveThemeProvider} from "./components/Context/ActiveThemeContext";
+import {MainContainer} from "./components/MainContainer/MainContainer";
+import {PageTitle} from "./components/PageTitle/PageTitle";
+
 function App() {
-  const [theme, setTheme] = useState(lightTheme);
-
-  const toggleTheme = (mode: PaletteMode) => {
-    if (mode === "light") {
-      setTheme(lightTheme);
-    } else {
-      setTheme(darkTheme);
-    }
-  };
-
   return (
-    <ThemeProvider theme={theme}>
+<ActiveThemeProvider>
       <BrowserRouter>
         <TopBar />
 
@@ -28,13 +21,8 @@ function App() {
           <Grid item sx={{ width: 300 }}>
             <LeftNavigation />
           </Grid>
-          <Grid
-            item
-            xs
-            sx={{
-              backgroundColor: theme.palette.background.default,
-            }}
-          >
+          <MainContainer>
+            <PageTitle />
             <RowContextProvider>
               <Routes>
                 {Object.values(navigationRoutes).map((route) => (
@@ -47,10 +35,10 @@ function App() {
                 <Route path={"*"} element={<Error404 />} />
               </Routes>
             </RowContextProvider>
-          </Grid>
+          </MainContainer>
         </Grid>
       </BrowserRouter>
-    </ThemeProvider>
+</ActiveThemeProvider>
   );
 }
 
