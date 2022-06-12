@@ -73,6 +73,7 @@ export const SportsScreen = () => {
         sx={{
           fontSize: 24,
           fontWeight: 550,
+          color: theme.palette.text.primary
         }}
       >
         Sports
@@ -120,6 +121,7 @@ export const SportsScreen = () => {
             <Typography
               sx={{
                 fontWeight: 450,
+                color: theme.palette.text.primary
               }}
             >
               {sportDetails.name} ({sportDetails.location})
