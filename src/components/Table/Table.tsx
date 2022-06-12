@@ -1,17 +1,20 @@
 import {
-    Box,
-    Button,
-    ButtonProps,
-    Paper,
-    Table as MuiTable,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow as MuiTableRow,
-    Typography, useTheme,
+  Box,
+  Button,
+  ButtonProps,
+  Modal,
+  Paper,
+  Table as MuiTable,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow as MuiTableRow,
+  TextField,
+  Typography,
+  useTheme,
 } from "@mui/material";
-import { CSSProperties, FC, ReactElement } from "react";
+import { CSSProperties, FC, ReactElement, useState } from "react";
 import { TableRow } from "./TableRow";
 import { ModelWithId } from "../../types/table.types";
 
@@ -36,7 +39,23 @@ export const Table: FC<TableProps<any>> = ({
   title,
   ButtonProps,
 }) => {
-    const theme = useTheme()
+  const theme = useTheme();
+  const [openModal, setOpenModal] = useState(false);
+  const handleOpen = () => {
+    setOpenModal(!openModal);
+  };
+
+  const [name, setName] = useState("");
+  const [location, setLocation] = useState("");
+
+  const alertData = () => {
+    alert(
+      `
+      name: "${name}",
+      location: "${location}"
+      `
+    );
+  };
   return (
     <Box>
       {/*TODO: style to match designs*/}
@@ -53,20 +72,75 @@ export const Table: FC<TableProps<any>> = ({
       >
         <Typography
           sx={{
-              color: theme.palette.secondary.contrastText,
+            color: theme.palette.secondary.contrastText,
           }}
         >
           {title}
         </Typography>
         {ButtonProps !== undefined && (
-          <Button
-            variant={"contained"}
-            sx={{
-              paddingY: 0.5,
-              lineHeight: 1.5,
-            }}
-            {...ButtonProps}
-          />
+          <>
+            <Button
+              variant={"contained"}
+              sx={{
+                paddingY: 0.5,
+                lineHeight: 1.5,
+              }}
+              onClick={handleOpen}
+              {...ButtonProps}
+            />
+            <Modal
+              open={openModal}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  backgroundColor: theme.palette.background.default,
+                  padding: 4,
+                  gap: 4,
+                }}
+              >
+                <TextField
+                  id="filled-basic"
+                  label="Name"
+                  variant="filled"
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+                <TextField
+                  id="filled-basic"
+                  label="Location"
+                  variant="filled"
+                  onChange={(e) => setLocation(e.target.value)}
+                  required
+                />
+                <Button
+                  variant={"contained"}
+                  sx={{
+                    paddingY: 0.5,
+                    lineHeight: 1.5,
+                  }}
+                  onClick={alertData}
+                >
+                  Save
+                </Button>
+                <Button
+                  variant={"contained"}
+                  sx={{
+                    paddingY: 0.5,
+                    lineHeight: 1.5,
+                  }}
+                  onClick={handleOpen}
+                >
+                  Cancel
+                </Button>
+              </Box>
+            </Modal>
+          </>
         )}
       </Paper>
 
