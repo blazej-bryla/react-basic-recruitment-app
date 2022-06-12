@@ -1,7 +1,7 @@
-import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import {ListItemButton, ListItemIcon, ListItemText, useTheme} from "@mui/material";
 import { SvgIconComponent } from "@mui/icons-material";
-import { Link } from "react-router-dom";
-import { FC, ReactElement } from "react";
+import {Link, useLocation} from "react-router-dom";
+import {FC, ReactElement} from "react";
 
 type NavigationItemProp = {
   to: string;
@@ -10,11 +10,16 @@ type NavigationItemProp = {
 };
 
 export const NavigationItem: FC<NavigationItemProp> = ({ to, icon, label }) => {
-  return (
+    const theme = useTheme()
+    let actualPath =  useLocation().pathname
+    return (
+
     <Link to={to} style={{ textDecoration: 'none', color: "black" }}>
-      <ListItemButton >
+      <ListItemButton
+      selected={actualPath === to}
+      >
         <ListItemIcon sx={{minWidth: 30}}>{icon}</ListItemIcon>
-        <ListItemText>{label}</ListItemText>
+        <ListItemText sx={{color: theme.palette.text.primary}}>{label}</ListItemText>
       </ListItemButton>
     </Link>
   );
